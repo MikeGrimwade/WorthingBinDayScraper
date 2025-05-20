@@ -1,0 +1,25 @@
+name: Worthing Bin Day Scraper
+image: ghcr.io/wez/govee2mqtt-{arch}
+version: "1.0.0"
+slug: worthing_bin_day_scraper
+description: Scrapes bin collection dates for a given UPRN
+url: https://github.com/MikeGrimwade/WorthingBinDayScraper
+arch:
+  - amd64
+  - aarch64
+  - armv7
+init: false
+startup: services
+apparmor: true
+ingress: false
+
+# Host network access is required 
+host_network: true
+ports:
+  5000/tcp: 5000
+
+options:
+  uprn: "100061905781"
+schema:
+  uprn: "str"
+  
