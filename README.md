@@ -52,8 +52,8 @@ rest:
 ```          
 This will create a sensor with 6 attributes attached containing the dates. All you need then is to create template helpers through the UI.
 
-Name: Next Black Bin
-Device Class: Date
-State Template: {{ state_attr('sensor.bin_dates', 'black_bin_next') }}
+Name: Next Black Bin  
+Device Class: Date  
+State Template: {{ state_attr('sensor.bin_dates', 'black_bin_next') }}  
 
 Repeat for each one you want to use.
