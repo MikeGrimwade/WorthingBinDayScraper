@@ -25,12 +25,12 @@ While the add-on is running, GET calls to http://localhost:5000/bin-dates will r
 }
 ```
 
-black_bin_next = Next black bin collection date.
-black_bin_next2 = The subsequent black bin collection date if provided.
-blue_bin_next = Next blue bin collection date.
-blue_bin_next2 = The subsequent blue bin collection date if provided.
-garden_bin_next = Next garden bin collection date.
-garden_bin_next2 = The subsequent garden bin collection date if provided.
+black_bin_next = Next black bin collection date.  
+black_bin_next2 = The subsequent black bin collection date if provided.  
+blue_bin_next = Next blue bin collection date.  
+blue_bin_next2 = The subsequent blue bin collection date if provided.  
+garden_bin_next = Next garden bin collection date.  
+garden_bin_next2 = The subsequent garden bin collection date if provided.  
 
 
 ## Adding Sensors to Home Assistant
