@@ -1,9 +1,9 @@
 name: Worthing Bin Day Scraper
-image: ghcr.io/wez/govee2mqtt-{arch}
 version: "1.0.0"
 slug: worthing_bin_day_scraper
 description: Scrapes bin collection dates for a given UPRN
 url: https://github.com/MikeGrimwade/WorthingBinDayScraper
+
 arch:
   - amd64
   - aarch64
