@@ -58,7 +58,49 @@ State Template: {{ state_attr('sensor.bin_dates', 'black_bin_next') }}
 
 Repeat for each one you want to use.
 
+## When is the next collection day?  
+Add a template sensor set the state template to be...
+```
+{% set blue = states('sensor.blue_bin_next') %}
+{% set black = states('sensor.black_bin_next') %}
+{% if blue == 'unknown' and black != 'unknown' %}
+  {{ strptime(black, '%Y-%m-%d').strftime('%A') }}
+{% elif black == 'unknown' and blue != 'unknown' %}
+  {{ strptime(blue, '%Y-%m-%d').strftime('%A') }}
+{% elif blue <= black %}
+  {{ strptime(blue, '%Y-%m-%d').strftime('%A') }}
+{% else %}
+  {{ strptime(black, '%Y-%m-%d').strftime('%A') }}
+{% endif %}
+```
 
-
-
-
+## What colour bin is collected next?  
+Add a template sensor set the state template to be...
+```
+{% set blue = states('sensor.blue_bin_next') %}
+{% set black = states('sensor.black_bin_next') %}
+{% if blue == 'unknown' and black != 'unknown' %}
+  Black Bin
+{% elif black == 'unknown' and blue != 'unknown' %}
+  Blue Bin
+{% elif blue <= black %}
+  Blue Bin
+{% else %}
+  Black Bin
+{% endif %}
+```
+## What/when is the next bin collection going to be?  
+Add a template sensor set the state template to be...
+```
+{% set blue = states('sensor.blue_bin_next') %}
+{% set black = states('sensor.black_bin_next') %}
+{% if blue == 'unknown' and black != 'unknown' %}
+  Next collection is the Black Bin on {{ strptime(black, '%Y-%m-%d').strftime('%A') }}.
+{% elif black == 'unknown' and blue != 'unknown' %}
+  Next collection is the Blue Bin on {{ strptime(blue, '%Y-%m-%d').strftime('%A') }}.
+{% elif blue <= black %}
+  Next collection is the Blue Bin on {{ strptime(blue, '%Y-%m-%d').strftime('%A') }}.
+{% else %}
+  Next collection is the Black Bin on {{ strptime(black, '%Y-%m-%d').strftime('%A') }}.
+{% endif %}
+```
