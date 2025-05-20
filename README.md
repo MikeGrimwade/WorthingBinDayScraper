@@ -13,7 +13,7 @@ Install the Add-On then configure your UPRN value in the config page. Once you'v
 To determine the UPRN for your address visit the Adur &amp; Worthing website (https://www.adur-worthing.gov.uk/bin-day/) and view your upcoming bin days by entering postcode and selecting your address. You will find your UPRN value in the url looking something like brlu-selected-address=1234567890
 
 ## Usage
-While the add-on is running, GET calls to http://[HASS-IP]:5000/bin-dates will return JSON values.
+While the add-on is running, GET calls to http://localhost:5000/bin-dates will return JSON values.
 ```
 {
   "black_bin_next": "2025-05-27",
