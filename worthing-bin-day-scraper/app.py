@@ -3,6 +3,7 @@ from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 import re
 import os
+import json
 from datetime import datetime
 
 app = Flask(__name__)
@@ -77,11 +78,30 @@ def fetch_bin_dates(uprn: str, save_html: bool = False):
         browser.close()
         return data
 
+def load_uprn_from_config():
+    config_path = "/data/options.json"
+    if not os.path.exists(config_path):
+        print(f"Config file {config_path} not found.")
+        return None
+    try:
+        with open(config_path) as f:
+            options = json.load(f)
+            uprn = options.get("uprn")
+            if not uprn:
+                print("UPRN not set in options.json")
+            return uprn
+    except Exception as e:
+        print(f"Failed to load options.json: {e}")
+        return None
+
+# Load UPRN once on start (could be improved to reload on change)
+CONFIGURED_UPRN = load_uprn_from_config()
+
 @app.route("/bin-dates")
 def get_bin_dates():
-    uprn = request.args.get("uprn")
+    uprn = request.args.get("uprn") or CONFIGURED_UPRN
     if not uprn:
-        return jsonify({"error": "Missing 'uprn' parameter"}), 400
+        return jsonify({"error": "Missing 'uprn' parameter and no UPRN configured"}), 400
     try:
         data = fetch_bin_dates(uprn, save_html=True)
         return jsonify(data)
