@@ -1,0 +1,13 @@
+{
+  "name": "Worthing Bin Day Scraper",
+  "version": "1.0.0",
+  "slug": "worthing_bin_day_scraper",
+  "description": "Scrapes bin collection dates for a given UPRN",
+  "startup": "services",
+  "boot": "auto",
+  "arch": ["amd64", "aarch64"],
+  "ports": {
+    "5000/tcp": 5000
+  },
+  "webui": "http://[HOST]:[PORT:5000]",
+}
