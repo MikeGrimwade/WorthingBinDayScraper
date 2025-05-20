@@ -5,9 +5,15 @@
   "description": "Scrapes bin collection dates for a given UPRN",
   "startup": "services",
   "boot": "auto",
-  "arch": ["amd64", "aarch64"],
+  "options": {
+    "uprn": "100061905781"
+  },
+  "schema": {
+    "uprn": "str"
+  },
+  "ingress": false,
+  "host_network": true,
   "ports": {
     "5000/tcp": 5000
   },
-  "webui": "http://[HOST]:[PORT:5000]",
 }
