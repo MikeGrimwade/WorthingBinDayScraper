@@ -1,5 +1,5 @@
 name: Worthing Bin Day Scraper
-version: "1.0.0"
+version: "1.0.1"
 slug: worthing_bin_day_scraper
 description: Scrapes bin collection dates for a given UPRN
 url: https://github.com/MikeGrimwade/WorthingBinDayScraper
