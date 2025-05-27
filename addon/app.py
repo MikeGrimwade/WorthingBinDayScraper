@@ -28,22 +28,25 @@ def extract_dates(soup, section_heading):
     if not section:
         return None, None
 
-    # Search nearby <p> tags for "Next collections:"
+    # Search the next few <p> tags for one that contains a date
     next_p = section.find_next("p")
-    while next_p:
-        if "Next collections:" in next_p.get_text():
-            break
+    dates = []
+
+    while next_p and len(dates) < 2:
+        text = next_p.get_text()
+        # Find all potential date strings like "29th May" or "29 May"
+        matches = re.findall(r"(\d{1,2}(?:st|nd|rd|th)?\s+\w+)", text)
+        for match in matches:
+            parsed = parse_fuzzy_date(match)
+            if parsed and parsed not in dates:
+                dates.append(parsed)
+            if len(dates) == 2:
+                break
         next_p = next_p.find_next("p")
 
-    if not next_p:
-        return None, None
-
-    matches = re.findall(r"(\d{1,2}(st|nd|rd|th)?\s+\w+)", next_p.get_text())
-    dates = [parse_fuzzy_date(m[0]) for m in matches if parse_fuzzy_date(m[0])]
-
-    first_date = dates[0] if len(dates) > 0 else None
-    second_date = dates[1] if len(dates) > 1 else None
-    return first_date, second_date
+    # Return one or two dates, fill with None as needed
+    return (dates[0] if len(dates) > 0 else None,
+            dates[1] if len(dates) > 1 else None)
 
 def fetch_bin_dates(uprn: str, save_html: bool = False):
     with sync_playwright() as p:
